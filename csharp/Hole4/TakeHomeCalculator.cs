@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Hole4
 {
+    //13 points
     public class TakeHomeCalculator
     {
         private readonly int percent;
@@ -25,14 +26,11 @@ namespace Hole4
             }
 
             Double amount = total.value * (percent / 100d);
-            Money tax = new Money(Convert.ToInt32(amount), first.currency);
+            Money tax = Money.Create(Convert.ToInt32(amount), first.currency); //+2 create method
 
-            if (!total.currency.Equals(tax.currency))
-            {
-                throw new Incalculable();
-            }
-
-            return new Money(total.value - tax.value, first.currency);
+            //+1 extract method
+            //+1 make non static
+            return total.Minus(tax);
         }
     }
 }

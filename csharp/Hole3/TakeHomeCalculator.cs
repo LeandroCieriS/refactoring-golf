@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Hole3
 {
+    // 9 points
     public class TakeHomeCalculator
     {
         private readonly int percent;
@@ -21,16 +22,10 @@ namespace Hole3
 
             foreach (Money next in monies)
             {
-                if (!next.currency.Equals(total.currency))
-                {
-                    throw new Incalculable();
-                }
+                // +2 join for eachs
+                total = total.Plus(next);
             }
 
-            foreach (Money next in monies)
-            {
-                total = new Money(total.value + next.value, next.currency);
-            }
 
             Double amount = total.value * (percent / 100d);
             Money tax = new Money(Convert.ToInt32(amount), first.currency);

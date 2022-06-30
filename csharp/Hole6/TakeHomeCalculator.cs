@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Hole6
 {
+    // 7 points
     public class TakeHomeCalculator
     {
         private readonly TaxRate taxRate;
@@ -14,15 +14,13 @@ namespace Hole6
 
         public Money NetAmount(Money first, params Money[] rest)
         {
-            List<Money> monies = rest.ToList();
-
-            Money total = first;
-
-            foreach (Money next in monies)
-            {
-                total = total.Plus(next);
-            }
-
+            //+1 to linq
+            //+1 rename first
+            //+1 rename x
+            //+1 inline
+            //+2 remove toList
+            //+1 remove unused usings
+            Money total = rest.Aggregate(first, (money, x) => money.Plus(x));
             Money tax = taxRate.Apply(total);
             return total.Minus(tax);
         }

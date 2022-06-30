@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Hole1
 {
+    // 4 points
     public class TakeHomeCalculator
     {
         private readonly int percent;
@@ -21,7 +22,7 @@ namespace Hole1
 
             foreach (Pair<int, String> next in pairs)
             {
-                if (next.second != total.second)
+                if (!string.Equals(next.second, total.second)) // +1 Equals
                 {
                     throw new Incalculable();
                 }
@@ -35,14 +36,12 @@ namespace Hole1
             Double amount = total.first * (percent / 100d);
             Pair<int, String> tax = new Pair<int, String>(Convert.ToInt32(amount), first.second);
 
-            if (total.second == tax.second)
-            {
-                return new Pair<int, String>(total.first - tax.first, first.second);
-            }
-            else
+            if (!string.Equals(total.second, tax.second)) // +1 invert if, +1 Equals
             {
                 throw new Incalculable();
             }
+            // +1 remove else
+            return new Pair<int, String>(total.first - tax.first, first.second);
         }
     }
 }

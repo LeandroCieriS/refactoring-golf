@@ -12,5 +12,20 @@ namespace Hole3
             this.value = value;
             this.currency = currency;
         }
+
+        //+1 move method to another file
+        //+1 make non static
+        //+1 rename parameter
+        public Money Plus(Money other) //+1 extract method
+        {
+            // +2 Remove "Money total = this;"
+            if (!other.currency.Equals(currency))
+            {
+                throw new Incalculable();
+            }
+
+            //+1 inline
+            return new Money(value + other.value, other.currency);
+        }
     }
 }
